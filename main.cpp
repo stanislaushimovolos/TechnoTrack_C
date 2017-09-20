@@ -2,23 +2,31 @@
 #include <cstring>
 #include <cstdlib>
 
-void swapCharPointers (char **a, char **b);
+struct myString;
 
-void sortByAlphabet (char **text, const int numOfStrings);
+void swapMyStrings (myString *a, myString *b);
 
 size_t countStrings (const char *buffer, size_t sizeOfBuffer);
 
-void createLinesPointers (char **text, char *buffer, const int sizeOfBuffer);
+void createLinesPointers (myString arrayOfPtrmyString[], char *buffer, const int sizeOfBuffer);
 
-void writeSorted (char **text, size_t numOfStrings, int userChoice);
+void sortByAlphabet (myString arrayOfPtrmyString[], const int numOfStrings);
+
+void writeSorted (myString arrayOfPtrmyString[], size_t numOfStrings, int userChoice);
+
+struct myString
+{
+	int length;
+	char* str;
+};
+
 
 const int writeDisplay = 1;
 const int writeFile = 2;
 
-
-int main () {
-
-	// Load file
+int main ()
+{
+// Load file
 	FILE *file = fopen ("poem.txt", "r");
 
 	if (file == NULL) {
@@ -38,45 +46,38 @@ int main () {
 	fread (buffer, 1, sizeOfBuffer, file);
 	fclose (file);
 
-	// Count lines and create array of lines pointers
+	// Count lines and create array structures
 
 	size_t numOfStrings = countStrings (buffer, sizeOfBuffer);
-	char **text = (char **) calloc (numOfStrings, sizeof (char *));
-	createLinesPointers (text, buffer, sizeOfBuffer);
+	myString *arrayOfPtrmyString = (myString *)calloc (numOfStrings, sizeof (myString));
+	createLinesPointers (arrayOfPtrmyString, buffer, sizeOfBuffer);
 
 	// Sort lines
 
-	sortByAlphabet (text, numOfStrings);
+	sortByAlphabet (arrayOfPtrmyString, numOfStrings);
+
 
 	// Print or write sorted lines
 
 	int userChoice = 0;
 	printf ("Poem_Sorter \nDisplay(%d) or write to the file(%d)? ", writeDisplay, writeFile);
 	scanf ("%d", &userChoice);
-	writeSorted (text, numOfStrings, userChoice);
+	writeSorted (arrayOfPtrmyString, numOfStrings, userChoice);
 
 	// Finish
 
-	free (text);
+	free (arrayOfPtrmyString);
 	free (buffer);
 	return 0;
 }
 
 
-void swapCharPointers (char **a, char **b) {
-	char *c = *a;
+void swapMyStrings (myString *a, myString *b){
+	myString c = *a;
 	*a = *b;
 	*b = c;
+
 }
-
-
-void sortByAlphabet (char **text, const int numOfStrings) {
-	for (int i = 0; i < numOfStrings - 1; i++)
-		for (int j = 0; j < numOfStrings - i - 1; j++)
-			if (strcasecmp (text[j], text[j + 1]) > 0)
-				swapCharPointers (&text[j], &text[j + 1]);
-}
-
 
 size_t countStrings (const char *buffer, size_t sizeOfBuffer) {
 	size_t numberOfStrings = 1;
@@ -86,30 +87,43 @@ size_t countStrings (const char *buffer, size_t sizeOfBuffer) {
 	return numberOfStrings;
 }
 
-
-void createLinesPointers (char **text, char *buffer, const int sizeOfBuffer) {
-	text[0] = buffer;
+void createLinesPointers ( myString arrayOfPtrmyString[], char *buffer, const int sizeOfBuffer) {
+	int counter = 0;
+	(arrayOfPtrmyString[0]).str = buffer;
 	for (int i = 0, j = 1; i < sizeOfBuffer; i++)
 		if (buffer[i] == '\n' || buffer[i] == '\r') {
 			if (buffer[i] == '\n')
-				text[j++] = buffer + i + 1;
+			{
+				(arrayOfPtrmyString[j]).str = buffer + i + 1;
+				(arrayOfPtrmyString[j - 1]).length = i - counter - 1;
+				counter = i;
+				j++;
+				buffer[i] = '\0';
+			}
 			buffer[i] = '\0';
 		}
 }
 
-void writeSorted (char **text, size_t numOfStrings, int userChoice) {
+void sortByAlphabet (myString arrayOfPtrmyString[], const int numOfStrings) {
+	for (int i = 0; i < numOfStrings - 1; i++)
+		for (int j = 0; j < numOfStrings - i - 1; j++)
+			if (strcasecmp ((arrayOfPtrmyString[j]).str, (arrayOfPtrmyString[j + 1]).str) > 0)
+				swapMyStrings (&arrayOfPtrmyString[j], &arrayOfPtrmyString[j + 1]);
+}
+
+void writeSorted (myString arrayOfPtrmyString[], size_t numOfStrings, int userChoice) {
 	switch (userChoice) {
 		case writeDisplay:
 			for (int i = 0; i < numOfStrings; i++)
-				if (text[i][0] != 0)
-					printf ("%s\n", text[i]);
+				if ((int)((arrayOfPtrmyString[i]).str)[0] != 0)
+					printf ("%s\n", (arrayOfPtrmyString[i]).str);
 			break;
 
 		case writeFile: {
 			FILE *file2 = fopen ("sorted_poem.txt", "w");
 			for (int i = 0; i < numOfStrings; i++)
-				if (text[i][0] != 0)
-					fprintf (file2, "%s\n", text[i]);
+				if ((int)((arrayOfPtrmyString[i]).str)[0] != 0)
+					fprintf (file2, "%s\n", (arrayOfPtrmyString[i]).str);
 			fclose (file2);
 			break;
 		}
