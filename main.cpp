@@ -24,6 +24,7 @@ const int writeDisplay = 1;
 const int writeFile = 2;
 const int sortAlphabet = 1;
 const int sortRhyme = 2;
+
 const char inputFilename[] = "poem.txt";
 const char outputFilename[] = "sorted_poem.txt";
 
