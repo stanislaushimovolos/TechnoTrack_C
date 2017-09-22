@@ -12,4 +12,4 @@ void swapMyStrings (string_t *a, string_t *b);
 
 size_t countStrings (const char *buffer, size_t sizeOfBuffer);
 
-void createLinesPointers (string_t arrayOfPtrString[], char *buffer, const int sizeOfBuffer);
+void createArrayOfString_t (string_t *arrayOfPtrString, char *buffer, const int sizeOfBuffer);
