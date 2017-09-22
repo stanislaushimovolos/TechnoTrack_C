@@ -1,13 +1,5 @@
 #include "shakspeare.h"
 
-
-void swapMyStrings (string_t *a, string_t *b){
-	string_t c = *a;
-	*a = *b;
-	*b = c;
-}
-
-
 size_t countStrings (const char *buffer, size_t sizeOfBuffer) {
 	size_t numberOfStrings = 1;
 	for (int i = 0; i < sizeOfBuffer; i++)
