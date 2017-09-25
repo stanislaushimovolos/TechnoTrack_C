@@ -8,7 +8,6 @@ size_t countStrings (const char *buffer, size_t sizeOfBuffer) {
 	return numberOfStrings;
 }
 
-
 void createArrayOfString_t (string_t *arrayOfPtrString, char *buffer, const int sizeOfBuffer) {
 	arrayOfPtrString[0].str = buffer;
 	int i_old = 0, nStr = 1;
