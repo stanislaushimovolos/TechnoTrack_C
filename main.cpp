@@ -19,54 +19,26 @@ void writeSortedDisplay (const size_t numOfStrings, string_t arrayOfString_t[]);
 
 void sortLines (const size_t numOfStrings, const int userChoice, string_t arrayOfString_t[]);
 
+void workingWithFinalUser (size_t numOfStrings, string_t *arrayOfString_t);
+
 const char inputFilename[] = "poem.txt";
 const char outputFilename[] = "sorted_poem.txt";
 
 
 int main () {
 
+	size_t sizeOfBuffer = 0;
+	size_t numOfStrings = 0;
+
 	// Open file and get buffer
 
-	size_t sizeOfBuffer = 0;
-	char *buffer = fileOpening (inputFilename, &sizeOfBuffer);
+	char *buffer = getBufferFromFileGetSzOfBuf (inputFilename, &sizeOfBuffer);
 
-	// Count lines and create array structures
+	// Create array  of structures and getting number of strings
 
-	size_t numOfStrings = countStrings (buffer);
-	string_t *arrayOfString_t = (string_t *) calloc (numOfStrings, sizeof (string_t));
-	createArrayOfString_t (sizeOfBuffer, buffer, arrayOfString_t);
+	string_t *arrayOfString_t = createArrayOfString_t (sizeOfBuffer, buffer, &numOfStrings);
 
-	int userChoiceDsplOrFile = 0;
-	int userChoiceAlphOrRhyme = 0;
-
-	printf ("Poem_Sorter\n"
-			        "Sort by Alpabet(%d) or by rhyme(%d)?\n", SortAlphabet, SortRhyme);
-
-	// User choice : sort by rhyme or by alphabet
-
-	std::cin >> userChoiceAlphOrRhyme;
-
-	if (!std::cin || (userChoiceAlphOrRhyme != SortAlphabet && userChoiceAlphOrRhyme != SortRhyme)) {
-		printf ("Wrong input");
-		return 0;
-	}
-
-	// Line sorting
-
-	sortLines (numOfStrings, userChoiceAlphOrRhyme, arrayOfString_t);
-
-	printf ("Display(%d) or write to the file(%d) ?\n", WriteDisplay, WriteFile);
-
-	// User choice : display or write to the file
-
-	std::cin >> userChoiceDsplOrFile;
-
-	if (!std::cin || (userChoiceDsplOrFile != WriteFile && userChoiceDsplOrFile != WriteDisplay)) {
-		printf ("Wrong input");
-		return 0;
-	}
-
-	writeSorted (numOfStrings, userChoiceDsplOrFile, arrayOfString_t);
+	workingWithFinalUser (numOfStrings, arrayOfString_t);
 
 	// Finish
 
@@ -106,7 +78,6 @@ int compareStrRhyme (const void *s1, const void *s2) {
 #undef RLength_
 
 }
-
 
 int compareStrAlphabet (const void *s1, const void *s2) {
 	assert (s1);
@@ -176,10 +147,45 @@ void writeSorted (const size_t numOfStrings, const int userChoice, string_t arra
 		case 1:
 			writeSortedDisplay (numOfStrings, arrayOfString_t);
 			break;
+
 		case 2:
 			writeSortedFile (numOfStrings, arrayOfString_t);
 			break;
 		default:
 			break;
 	}
+}
+
+void workingWithFinalUser (size_t numOfStrings, string_t *arrayOfString_t) {
+	int userChoiceDsplOrFile = 0, userChoiceAlphOrRhyme = 0;
+
+	int *ptrUserChoiceDsplOrFile = &userChoiceDsplOrFile;
+	int *ptrUserChoiceAlphOrRhyme = &userChoiceAlphOrRhyme;
+
+	printf ("Poem_Sorter\n"
+			        "Sort by Alpabet(%d) or by rhyme(%d)?\n", SortAlphabet, SortRhyme);
+
+	// User choice : sort by rhyme or by alphabet
+
+	std::cin >> *ptrUserChoiceAlphOrRhyme;
+
+	if (!std::cin || (userChoiceAlphOrRhyme != SortAlphabet && userChoiceAlphOrRhyme != SortRhyme)) {
+		printf ("Wrong input\n");
+	}
+
+	// Line sorting
+
+	sortLines (numOfStrings, userChoiceAlphOrRhyme, arrayOfString_t);
+
+	printf ("Display(%d) or write to the file(%d) ?\n", WriteDisplay, WriteFile);
+
+	// User choice : display or write to the file
+
+	std::cin >> *ptrUserChoiceDsplOrFile;
+
+	if (!std::cin || (userChoiceDsplOrFile != WriteFile && userChoiceDsplOrFile != WriteDisplay)) {
+		printf ("Wrong input\n");
+	}
+	writeSorted (numOfStrings, userChoiceDsplOrFile, arrayOfString_t);
+
 }
