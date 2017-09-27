@@ -1,18 +1,41 @@
 #pragma once
 
-#include <cstdio>
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
 
-typedef struct
-{
-	int length;
-	char* str;
+
+/*
+ *  structure which keeps line and length of this line
+ */
+
+typedef struct {
+	int length;   // Length of the line
+
+	char *str;    // Pointer on the line
+
 } string_t;
 
-size_t countStrings (const char *buffer, size_t sizeOfBuffer);
+/*   counts the amount of lines in the $buffer
+ *   returns  the amount of lines
+ */
 
-void createArrayOfString_t (string_t *arrayOfPtrString, char *buffer, const int sizeOfBuffer);
+size_t countStrings (const char *buffer);
 
-const int writeDisplay = 1;
-const int writeFile = 2;
-const int sortAlphabet = 1;
-const int sortRhyme = 2;
+
+/*   creates the array of structures $arrayOfString_t
+ *   the pointer on the array is $buffer
+ */
+
+void createArrayOfString_t (const int sizeOfBuffer, char *buffer, string_t *arrayOfString_t);
+
+/*   getting the name of input file $inputFilename and writes the amount of symbols to $sizeOfBuffer
+ *   returns  the pointer on the text in the file
+ */
+
+char *fileOpening (const char *inputFilename, size_t *sizeOfBuffer);
+
+const int WriteDisplay = 1;
+const int WriteFile = 2;
+const int SortAlphabet = 1;
+const int SortRhyme = 2;

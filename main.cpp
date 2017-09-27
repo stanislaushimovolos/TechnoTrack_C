@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <iostream>
 #include <cstring>
 
@@ -8,85 +7,66 @@ int compareStrAlphabet (const void *s1, const void *s2);
 
 int compareStrRhyme (const void *s1, const void *s2);
 
-void sortByAlphabet (string_t arrayOfString_t[], const size_t numOfStrings);
+void sortByAlphabet (const size_t numOfStrings, string_t arrayOfString_t[]);
 
-void sortFromEnd (string_t arrayOfString_t[], const size_t numOfStrings);
+void sortFromEnd (const size_t numOfStrings, string_t arrayOfString_t[]);
 
-void writeSorted (int userChoice, string_t arrayOfString_t[], const size_t numOfStrings);
+void writeSorted (const size_t numOfStrings, const int userChoice, string_t arrayOfString_t[]);
 
-void writeSortedFile (string_t arrayOfString_t[], const size_t numOfStrings);
+void writeSortedFile (const size_t numOfStrings, string_t arrayOfString_t[]);
 
-void writeSortedDisplay (string_t arrayOfString_t[], const size_t numOfStrings);
+void writeSortedDisplay (const size_t numOfStrings, string_t arrayOfString_t[]);
 
-void sortLines (int userChoice, string_t arrayOfString_t[], const size_t numOfStrings);
+void sortLines (const size_t numOfStrings, const int userChoice, string_t arrayOfString_t[]);
 
 const char inputFilename[] = "poem.txt";
 const char outputFilename[] = "sorted_poem.txt";
 
 
-int main() {
+int main () {
 
-	// Load file
-	FILE *file = fopen (inputFilename, "r");
+	// Open file and get buffer
 
-	if (file == NULL) {
-		printf("FILE ERROR");
-		return 0;
-	}
-
-	// Get buffer size
-
-	fseek (file, 0, SEEK_END);
-	size_t sizeOfBuffer = (size_t) ftell(file);
-	fseek (file, 0, SEEK_SET);
-
-	// Create buffer and load file
-
-	char *buffer = (char *) calloc(sizeOfBuffer + 1, sizeof(char));
-	if (buffer == NULL) {
-		printf("Memory error");
-		return 0;
-	}
-
-	fread (buffer, 1, sizeOfBuffer, file);
-	fclose( file);
+	size_t sizeOfBuffer = 0;
+	char *buffer = fileOpening (inputFilename, &sizeOfBuffer);
 
 	// Count lines and create array structures
 
-	size_t numOfStrings = countStrings (buffer, sizeOfBuffer);
-	string_t *arrayOfString_t = (string_t *) calloc(numOfStrings, sizeof(string_t));
-	createArrayOfString_t (arrayOfString_t, buffer, sizeOfBuffer);
+	size_t numOfStrings = countStrings (buffer);
+	string_t *arrayOfString_t = (string_t *) calloc (numOfStrings, sizeof (string_t));
+	createArrayOfString_t (sizeOfBuffer, buffer, arrayOfString_t);
 
 	int userChoiceDsplOrFile = 0;
 	int userChoiceAlphOrRhyme = 0;
 
-	printf ("Poem_Sorter\nSort by Alpabet(%d) or by rhyme(%d)?\n", sortAlphabet, sortRhyme);
+	printf ("Poem_Sorter\n"
+			        "Sort by Alpabet(%d) or by rhyme(%d)?\n", SortAlphabet, SortRhyme);
 
 	// User choice : sort by rhyme or by alphabet
 
 	std::cin >> userChoiceAlphOrRhyme;
 
-	if (!std::cin || (userChoiceAlphOrRhyme != sortAlphabet & userChoiceAlphOrRhyme != sortRhyme)) {
-		printf("Wrong input");
+	if (!std::cin || (userChoiceAlphOrRhyme != SortAlphabet && userChoiceAlphOrRhyme != SortRhyme)) {
+		printf ("Wrong input");
 		return 0;
 	}
 
 	// Line sorting
 
-	sortLines (userChoiceAlphOrRhyme, arrayOfString_t, numOfStrings);
+	sortLines (numOfStrings, userChoiceAlphOrRhyme, arrayOfString_t);
 
-	printf ("Display(%d) or write to the file(%d) ?\n", writeDisplay, writeFile);
+	printf ("Display(%d) or write to the file(%d) ?\n", WriteDisplay, WriteFile);
 
 	// User choice : display or write to the file
 
 	std::cin >> userChoiceDsplOrFile;
 
-	if (!std::cin || (userChoiceDsplOrFile != writeFile & userChoiceDsplOrFile != writeDisplay)) {
-		printf("Wrong input");
+	if (!std::cin || (userChoiceDsplOrFile != WriteFile && userChoiceDsplOrFile != WriteDisplay)) {
+		printf ("Wrong input");
 		return 0;
 	}
 
-	writeSorted (userChoiceDsplOrFile, arrayOfString_t, numOfStrings);
+	writeSorted (numOfStrings, userChoiceDsplOrFile, arrayOfString_t);
 
 	// Finish
 
@@ -95,36 +75,43 @@ int main() {
 	return 0;
 }
 
+
 int compareStrRhyme (const void *s1, const void *s2) {
+	assert (s1);
+	assert (s2);
+
 	string_t leftStr = (*(string_t *) s1);
 	string_t rightStr = (*(string_t *) s2);
 	int counter = 0;
 
-	#define lLength leftStr.length
-	#define rLength rightStr.length
-	#define lStr leftStr.str
-	#define rStr rightStr.str
+#define LLength_  leftStr.length
+#define RLength_  rightStr.length
+#define LStr_     leftStr.str
+#define RStr_     rightStr.str
 
-	while (ispunct (lStr[lLength]) || isspace (lStr[lLength]))
-		rLength--;
+	while (ispunct (LStr_[LLength_]) || isspace (LStr_[LLength_]))
+		RLength_--;
 
-	while (ispunct (rStr[rLength]) || isspace (rStr[rLength]))
-		rLength--;
+	while (ispunct (RStr_[RLength_]) || isspace (RStr_[RLength_]))
+		RLength_--;
 
-	while (rStr[rLength - counter] == lStr[lLength - counter])
+	while (RStr_[RLength_ - counter] == LStr_[LLength_ - counter])
 		counter++;
 
-	return lStr[lLength - counter] - rStr[rLength - counter];
+	return LStr_[LLength_ - counter] - RStr_[RLength_ - counter];
 
-	#undef rStr
-	#undef lStr
-	#undef lLength
-	#undef rLength
+#undef RStr_
+#undef LStr_
+#undef LLength_
+#undef RLength_
 
 }
 
 
 int compareStrAlphabet (const void *s1, const void *s2) {
+	assert (s1);
+	assert (s2);
+
 	char *leftStr = (*(string_t *) s1).str;
 	char *rightStr = (*(string_t *) s2).str;
 
@@ -136,28 +123,37 @@ int compareStrAlphabet (const void *s1, const void *s2) {
 	return strcasecmp (leftStr, rightStr);
 }
 
-void sortByAlphabet (string_t arrayOfString_t[], const size_t numOfStrings) {
+void sortByAlphabet (const size_t numOfStrings, string_t arrayOfString_t[]) {
+	assert (arrayOfString_t);
+
 	qsort (arrayOfString_t, numOfStrings, sizeof (*arrayOfString_t), compareStrAlphabet);
 }
 
-void sortFromEnd (string_t arrayOfString_t[], const size_t numOfStrings) {
+void sortFromEnd (const size_t numOfStrings, string_t arrayOfString_t[]) {
+	assert (numOfStrings);
+	assert (arrayOfString_t);
+
 	qsort (arrayOfString_t, numOfStrings, sizeof (*arrayOfString_t), compareStrRhyme);
 }
 
-void sortLines (const int userChoice, string_t arrayOfString_t[], const size_t numOfStrings) {
+void sortLines (const size_t numOfStrings, const int userChoice, string_t arrayOfString_t[]) {
+	assert (arrayOfString_t);
+
 	switch (userChoice) {
 		case 1:
-			sortByAlphabet (arrayOfString_t, numOfStrings);
+			sortByAlphabet (numOfStrings, arrayOfString_t);
 			break;
 		case 2:
-			sortFromEnd(arrayOfString_t, numOfStrings);
+			sortFromEnd (numOfStrings, arrayOfString_t);
 			break;
 		default:
 			break;
 	}
 }
 
-void writeSortedFile (string_t arrayOfString_t[], const size_t numOfStrings) {
+void writeSortedFile (const size_t numOfStrings, string_t arrayOfString_t[]) {
+	assert (arrayOfString_t);
+
 	FILE *file2 = fopen (outputFilename, "w");
 	for (int i = 0; i < numOfStrings; i++)
 		if ((int) (arrayOfString_t[i].str)[0] != 0)
@@ -165,23 +161,25 @@ void writeSortedFile (string_t arrayOfString_t[], const size_t numOfStrings) {
 	fclose (file2);
 }
 
-void writeSortedDisplay (string_t arrayOfString_t[], const size_t numOfStrings) {
+void writeSortedDisplay (const size_t numOfStrings, string_t arrayOfString_t[]) {
+	assert (arrayOfString_t);
+
 	for (int i = 0; i < numOfStrings; i++)
 		if ((int) (arrayOfString_t[i]).str[0] != 0)
 			printf ("%s\n", arrayOfString_t[i].str);
 }
 
-void writeSorted (const int userChoice, string_t arrayOfString_t[], const size_t numOfStrings) {
+void writeSorted (const size_t numOfStrings, const int userChoice, string_t arrayOfString_t[]) {
+	assert (arrayOfString_t);
+
 	switch (userChoice) {
 		case 1:
-			writeSortedDisplay (arrayOfString_t, numOfStrings);
+			writeSortedDisplay (numOfStrings, arrayOfString_t);
 			break;
 		case 2:
-			writeSortedFile (arrayOfString_t, numOfStrings);
+			writeSortedFile (numOfStrings, arrayOfString_t);
 			break;
 		default:
 			break;
 	}
 }
-
-
