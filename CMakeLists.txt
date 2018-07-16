@@ -3,5 +3,5 @@ project(shakespeare)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp shakspeare.cpp shakspeare.h)
+set(SOURCE_FILES main.c sorter.c sorter.h)
 add_executable(shakespeare ${SOURCE_FILES})
