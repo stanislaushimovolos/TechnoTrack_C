@@ -75,7 +75,7 @@ int executeProgram(text_t *data, int argc, char **argv)
     }
 
     if (displayFlag)
-        execute(printText(data, argv[arg_counter]));
+        execute(displayText(data));
 
     if (argc)
         execute(printText(data, argv[arg_counter]));
