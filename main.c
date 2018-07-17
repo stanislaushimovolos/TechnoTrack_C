@@ -1,17 +1,31 @@
 #include "sorter.h"
 
-const char inputFilename[] = "poem.txt";
-const char outputFilename[] = "sorted_poem.txt";
+const char defaultOutput[] = "output.txt";
+const char defaultInput[] = "poem.txt";
+
+#define execute(_func_)         \
+    state = _func_;             \
+    if (state)                  \
+    {                           \
+        destructText(&data);    \
+        return state;           \
+    }
+
 
 int main(int argc, char *argv[])
 {
+    text_t data = {};
+    int state = 0;
 
-    Data data = {};
-    getBuf(&data, inputFilename);
-    makeTokens(&data);
-    sort(&data, cmpRhyme);
-    printText(&data, outputFilename);
+    execute(getBuf(&data, defaultInput));
+    execute(makeTokens(&data, "\n"));
 
+    execute(sort(&data, cmpRhyme));
+    execute(swapTokens(&data));
+    execute(printText(&data, defaultOutput));
+
+    //execute(showText(&data));
     destructText(&data);
-    return 0;
+
+    return EXIT_SUCCESS;
 }
