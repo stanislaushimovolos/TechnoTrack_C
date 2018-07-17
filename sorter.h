@@ -1,30 +1,37 @@
 #pragma once
 
+
+// Release version
+
 #define NDEBUG
+#include <assert.h>
 
 #include <stdio.h>
-#include <assert.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <errno.h>
 
+
 static const char *const errList[] = {"",
                                       "Invalid arguments in function",
                                       "Certain problems related to opening files",
-                                      "System couldn't allocate memory"
+                                      "System couldn't allocate memory",
+                                      "Error, unknown flag"
 };
 
+static const char defaultOutput[] = "output.txt";
+static const char defaultInput[] = "poem.txt";
 
 enum errors
 {
     ARGUMENTS = 1,
     OPENFILE,
     MEMORY,
-    OUT_OF_RANGE
+    UNKNOWN_FLAG,
+    OUT_OF_ERR_RANGE
 
 };
-
 
 
 int throw_error(int err_num, const char *msg, const char *_func, int _Line,
@@ -43,9 +50,10 @@ typedef struct
     size_t size;
     size_t tokensAmount;
     string_t *tokens;
-
 } text_t;
 
+
+int executeProgram(text_t *data, int argc, char **argv);
 
 int swapStr_t(string_t *, string_t *);
 

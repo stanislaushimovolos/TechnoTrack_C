@@ -1,15 +1,109 @@
 #include "sorter.h"
 
 
+#define execute(_func_)         \
+do                              \
+{                               \
+    state = _func_;             \
+    if (state)                  \
+    {                           \
+        destructText(data);     \
+        return state;           \
+    }                           \
+}while(0)
+
+
+int executeProgram(text_t *data, int argc, char **argv)
+{
+    if (!data)
+        return throw_error(ARGUMENTS, "Unexpected values of arguments (nullptr)",
+                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+
+    int displayFlag = 0;
+    int alphabetSortFlag = 0;
+    int state = 0;
+
+    argc--;
+    int arg_counter = 1;
+
+    if (argc && argv[arg_counter][0] != '-')
+    {
+        execute(getBuf(data, argv[arg_counter]));
+        arg_counter++;
+        argc--;
+    }
+    else
+        execute(getBuf(data, defaultInput));
+
+    execute(makeTokens(data, "\n"));
+
+    while (argc && argv[arg_counter][0] == '-')
+    {
+        switch (argv[arg_counter][1])
+        {
+            case 'D':
+            {
+                displayFlag = 1;
+                break;
+            }
+
+            case 'A':
+            {
+                alphabetSortFlag = 1;
+                break;
+            }
+
+            default:
+            {
+                printf("\nFlag name: %s\n", argv[arg_counter]);
+                return throw_error(UNKNOWN_FLAG, "",
+                                   __PRETTY_FUNCTION__, __LINE__, __FILE__);
+            }
+        }
+
+        argc--;
+        arg_counter++;
+    }
+
+
+    if (alphabetSortFlag)
+        execute(sort(data, cmpAlphabet));
+    else
+    {
+        execute(sort(data, cmpRhyme));
+        execute(swapTokens(data));
+    }
+
+    if (displayFlag)
+        execute(showText(data));
+
+    if (argc)
+        execute(printText(data, argv[arg_counter]));
+    else
+        execute(printText(data, defaultOutput));
+
+    return EXIT_SUCCESS;
+}
+
+
+#undef execute
+
+
 int throw_error(int err_num, const char *msg, const char *_func, int _Line,
                 const char *_File)
 {
-    printf("%s\nError № %d: %s\n"
-           "In function: %s\n"
-           "Line %d\n"
-           "File: %s\n\n", msg, err_num, errList[err_num], _func, _Line, _File);
+    if (err_num < OUT_OF_ERR_RANGE)
+    {
+        printf("%s\nError № %d: %s\n"
+               "In function: %s\n"
+               "Line %d\n"
+               "File: %s\n\n", msg, err_num, errList[err_num], _func, _Line, _File);
 
-    return err_num;
+        return err_num;
+    }
+
+    else return OUT_OF_ERR_RANGE;
+
 }
 
 
@@ -25,6 +119,8 @@ int swapStr_t(string_t *s1, string_t *s2)
     const string_t temp = *s1;
     *s1 = *s2;
     *s2 = temp;
+
+    return 0;
 }
 
 
@@ -60,8 +156,11 @@ int getBuf(text_t *data, const char *inputFile)
         fclose(file);
     }
     else
+    {
+        printf("Source file name is %s\n", inputFile);
         return throw_error(OPENFILE, "Can't open source file.",
                            __PRETTY_FUNCTION__, __LINE__, __FILE__);
+    }
     return 0;
 }
 
@@ -234,6 +333,7 @@ int printText(text_t *data, const char *outputFile)
 
     return 0;
 }
+
 
 int showText(text_t *data)
 {
