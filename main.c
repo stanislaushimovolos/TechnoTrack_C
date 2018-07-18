@@ -1,3 +1,12 @@
+
+/*!
+ * \brief Main program module.
+ * \author Stanislau Shimovolos
+ * \version 1.4
+ * \date 2018-7-17
+ */
+
+
 #include "sorter.h"
 
 int main(int argc, char *argv[])

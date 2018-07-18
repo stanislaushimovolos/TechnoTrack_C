@@ -1,12 +1,13 @@
 #pragma once
 
 /*!
+ * \brief Contains functions headers and some constants.
  * \author Stanislau Shimovolos
  * \version 1.4
  * \date 2018-7-17
  */
 
-// Release version so asserts was turned off.
+/// Release version so asserts were turned off.
 #define NDEBUG
 
 #include <assert.h>
@@ -20,7 +21,7 @@
 
 static const char *const errList[] = {"",
                                       "Invalid arguments in function.",
-                                      "Certain problems related to opening files.",
+                                      "Certain problems related to opening file.",
                                       "System couldn't allocate memory.",
                                       "Error, unknown flag."
 };
@@ -38,7 +39,7 @@ enum error_codes
     OPENFILE_ERR,           //!< Means that some problem was detected in process of opening file.
     MEMORY_ERR,             //!< Means that system couldn't allocate memory.
     UNKNOWN_FLAG_ERR,       //!< Means that unknown flag was detected in the command line, possible options: -D, -A
-    OUT_OF_ERR_RANGE_ERR
+    OUT_OF_ERR_RANGE_ERR    //!< Means that num of the error is too large
 
 };
 
@@ -88,7 +89,7 @@ int executeProgram(text_t *data, int argc, char **argv);
 int swapTokens(text_t *data);
 
 /*!
-    \brief Splits the data into tokens.
+    Splits the data into tokens.
     \param[in] data  text_t object.
     \param[in] separator The literal tokens separator (char).
     \return Returns an error code.
@@ -122,15 +123,15 @@ int swapStr_t(string_t *a, string_t *b);
 
 
 /*!
-    \brief Throws the error code and prints information about the error(standard output).
+    \brief Throws the error code and prints information about the error(standard output + standard error output).
     \param[in] err_num Error code.
-    \param[in] msg Information about the error.
+    \param[in] usr_msg Information about the error which will be able for user.
     \param[in] _func The  name of the function where the error was detected.
     \param[in] _line The number of the code line where the error was detected.
     \param[in] _file The name of the file where the error was detected.
     \return Returns an error code.
 */
-int throw_error(int err_num, const char *msg, const char *_func, int _line,
+int throw_error(unsigned int err_num, const char *usr_msg, const char *err_msg, const char *_func, int _line,
                 const char *_file);
 
 /*!
