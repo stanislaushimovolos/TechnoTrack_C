@@ -7,8 +7,22 @@
  */
 
 
-
 #include "sorter.h"
+
+/*!
+    \def throw(num, msg1, msg2)
+ *  Returns a value of \ref throw_error (uses for generation of code)
+ */
+
+#define throw(num, msg1, msg2)                                                          \
+     return throw_error(num, msg1, msg2,                                                \
+        __PRETTY_FUNCTION__, __LINE__, __FILE__);                                       \
+
+
+/*!
+ * \def execute(_func_)
+ * Uses for error checking.
+ */
 
 
 #define execute(_func_)         \
@@ -26,8 +40,7 @@ do                              \
 int executeProgram(text_t *data, int argc, char **argv)
 {
     if (!data)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr)",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr)");
 
     int displayFlag = 0;
     int alphabetSortFlag = 0;
@@ -66,8 +79,7 @@ int executeProgram(text_t *data, int argc, char **argv)
             default:
             {
                 printf("\nFlags name: %s\n", argv[arg_counter]);
-                return throw_error(UNKNOWN_FLAG_ERR, "Name of the flag is unknown.", argv[arg_counter],
-                                   __PRETTY_FUNCTION__, __LINE__, __FILE__);
+                throw(UNKNOWN_FLAG_ERR, "Name of the flag is unknown.", argv[arg_counter]);
             }
         }
 
@@ -98,36 +110,13 @@ int executeProgram(text_t *data, int argc, char **argv)
 #undef execute
 
 
-int throw_error(unsigned int err_num, const char *usr_msg, const char *err_msg, const char *_func, int _line,
-                const char *_file)
-{
-
-    if (usr_msg[0])
-        printf("%s\n", usr_msg);
-
-    if (err_num < OUT_OF_ERR_RANGE_ERR)
-    {
-
-        fprintf(stderr, "%s\nError № %d: %s\n"
-                        "In function: %s\n"
-                        "Line %d\n"
-                        "File: %s\n\n", err_msg, err_num, errList[err_num], _func, _line, _file);
-
-        return err_num;
-    }
-    else return OUT_OF_ERR_RANGE_ERR;
-
-}
-
-
 int swapStr_t(string_t *s1, string_t *s2)
 {
     assert(s1);
     assert(s2);
 
     if (!s1 || !s2)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     const string_t temp = *s1;
     *s1 = *s2;
@@ -143,8 +132,7 @@ int getBuf(text_t *data, const char *inputFile)
     assert (inputFile);
 
     if (!data || !inputFile)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     size_t l_buf_sz = 0;
     FILE *file = fopen(inputFile, "r");
@@ -160,9 +148,8 @@ int getBuf(text_t *data, const char *inputFile)
         assert(data->buffer);
 
         if (!data->buffer)
-            return throw_error(MEMORY_ERR, "System couldn't allocate memory for the data.",
-                               "Buffer error.",
-                               __PRETTY_FUNCTION__, __LINE__, __FILE__);
+            throw(MEMORY_ERR, "System couldn't allocate memory for the data.",
+                  "Buffer error.");
 
         data->size = l_buf_sz;
 
@@ -201,8 +188,7 @@ int makeTokens(text_t *data, char *separator)
     assert (data->buffer);
 
     if (!data || !data->buffer)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     size_t _tokensNum = countTokens(data->buffer, separator[0]);
     string_t *tokensArr = (string_t *) calloc(_tokensNum + 1, sizeof(string_t));
@@ -246,8 +232,7 @@ int cmpAlphabetReverse(const void *s1, const void *s2)
     assert (s2);
 
     if (!s1 || !s2)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     string_t firstStr = (*(string_t *) s1);
     string_t secondStr = (*(string_t *) s2);
@@ -278,8 +263,7 @@ int cmpAlphabet(const void *s1, const void *s2)
     assert (s2);
 
     if (!s1 || !s2)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     char *leftStr = (*(string_t *) s1).str;
     char *rightStr = (*(string_t *) s2).str;
@@ -299,8 +283,7 @@ int swapTokens(text_t *data)
     assert(data->tokens);
 
     if (!data || !data->tokens)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     size_t _tokensAmount = data->tokensAmount;
     string_t *_tokens = data->tokens;
@@ -319,8 +302,7 @@ int sort(text_t *text, int ( *comparator )(const void *, const void *))
     assert(comparator);
 
     if (!text || !comparator)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     qsort(text->tokens, text->tokensAmount, sizeof(string_t), comparator);
     return 0;
@@ -333,8 +315,7 @@ int printText(text_t *data, const char *outputFile)
     assert(data->tokens);
 
     if (!data || !data->tokens)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     string_t *arrOfStr = data->tokens;
     FILE *output = fopen(outputFile, "w");
@@ -353,8 +334,7 @@ int displayText(text_t *data)
     assert(data->tokens);
 
     if (!data || !data->tokens)
-        return throw_error(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).",
-                           __PRETTY_FUNCTION__, __LINE__, __FILE__);
+        throw(ARGUMENTS_ERR, "", "Unexpected values of arguments (nullptr).");
 
     string_t *arrOfStr = data->tokens;
 
@@ -378,3 +358,26 @@ void destructText(text_t *data)
         data->tokens = NULL;
     }
 }
+
+
+int throw_error(unsigned int err_num, const char *usr_msg, const char *err_msg, const char *_func, int _line,
+                const char *_file)
+{
+    if (usr_msg && usr_msg[0])
+        printf("%s\n", usr_msg);
+
+    if ((err_num < OUT_OF_ERR_RANGE_ERR) && err_msg && _func && _file)
+    {
+        if (err_msg[0])
+            fprintf(stderr, "%s\n", err_msg);
+        fprintf(stderr, "Error № %d: %s\n"
+                        "In function: %s\n"
+                        "Line %d\n"
+                        "File: %s\n\n", err_num, errList[err_num], _func, _line, _file);
+
+        return err_num;
+    }
+    else return OUT_OF_ERR_RANGE_ERR;
+}
+
+#undef throw

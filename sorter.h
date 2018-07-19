@@ -1,13 +1,17 @@
 #pragma once
 
 /*!
- * \brief Contains functions headers and some constants.
+ * \brief Contains function's headers and some constants.
  * \author Stanislau Shimovolos
  * \version 1.4
  * \date 2018-7-17
  */
 
-/// Release version so asserts were turned off.
+/*!
+  \def NDEBUG
+   Release version so asserts were turned off.
+*/
+
 #define NDEBUG
 
 #include <assert.h>
@@ -35,11 +39,11 @@ static const char defaultInput[] = "poem.txt";
 
 enum error_codes
 {
-    ARGUMENTS_ERR = 1,      //!< Means that function argument or some of them are equal NULL.
+    ARGUMENTS_ERR = 1,      //!< Means that function's argument or some of them are equal NULL.
     OPENFILE_ERR,           //!< Means that some problem was detected in process of opening file.
     MEMORY_ERR,             //!< Means that system couldn't allocate memory.
     UNKNOWN_FLAG_ERR,       //!< Means that unknown flag was detected in the command line, possible options: -D, -A
-    OUT_OF_ERR_RANGE_ERR    //!< Means that num of the error is too large
+    OUT_OF_ERR_RANGE_ERR    //!< Means that a number of an error is too large
 
 };
 
@@ -98,7 +102,7 @@ int makeTokens(text_t *data, char *separator);
 
 
 /*!
-    \brief Writes tokens to the text file.
+    \brief Writes tokens in the text file.
     \param[in] data  data text_t object.
     \param[in] outputFile the name of the output text file.
     \return Returns an error code.
@@ -107,7 +111,7 @@ int printText(text_t *data, const char *outputFile);
 
 
 /*!
-    \brief Writes tokens to the standard output.
+    \brief Writes tokens in the standard output.
     \param[in] data  data text_t object.
     \return Returns an error code.
 */
@@ -123,12 +127,12 @@ int swapStr_t(string_t *a, string_t *b);
 
 
 /*!
-    \brief Throws the error code and prints information about the error(standard output + standard error output).
-    \param[in] err_num Error code.
-    \param[in] usr_msg Information about the error which will be able for user.
-    \param[in] _func The  name of the function where the error was detected.
-    \param[in] _line The number of the code line where the error was detected.
-    \param[in] _file The name of the file where the error was detected.
+    \brief Throws an error code and prints information about the error(standard output + standard error output).
+    \param[in] err_num An error code.
+    \param[in] usr_msg Information about an error which is available for user.
+    \param[in] _func A name of the function where the error was detected.
+    \param[in] _line A number of a code line where an error was detected.
+    \param[in] _file A name of a file where an error was detected.
     \return Returns an error code.
 */
 int throw_error(unsigned int err_num, const char *usr_msg, const char *err_msg, const char *_func, int _line,
@@ -161,8 +165,8 @@ int cmpAlphabet(const void *str1, const void *str2);
 
 /*!
     \brief Sorts tokens of the data.
-    \param[in] data The text_t object.
-    \param[in] comparator The compare function.
+    \param[in] data text_t object.
+    \param[in] comparator A compare function.
     \return Returns an error code.
 */
 int sort(text_t *data, int ( *comparator )(const void *, const void *));
@@ -179,6 +183,6 @@ void destructText(text_t *data);
     \brief Counts the amount of tokens in the  input data.
     \param[in] buffer Input data.
     \param[in] sep Tokens separator.
-    \return The number of tokens.
+    \return A number of tokens.
 */
 size_t countTokens(const char *buffer, char sep);
