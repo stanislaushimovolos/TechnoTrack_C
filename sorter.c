@@ -1,5 +1,6 @@
 
 /*!
+ * \file sorter.c
  * \brief Implementation of sorter.h functions.
  * \author Stanislau Shimovolos
  * \version 1.4

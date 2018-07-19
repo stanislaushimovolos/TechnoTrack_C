@@ -1,5 +1,6 @@
 
 /*!
+ * \file main.c
  * \brief Main program module.
  * \author Stanislau Shimovolos
  * \version 1.4

@@ -1,6 +1,7 @@
 #pragma once
 
 /*!
+ * \file sorter.h
  * \brief Contains function's headers and some constants.
  * \author Stanislau Shimovolos
  * \version 1.4
