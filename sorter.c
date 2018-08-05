@@ -70,20 +70,17 @@ int executeProgram(text_t *data, int argc, char **argv)
                 displayFlag = 1;
                 break;
             }
-
             case 'A':
             {
                 alphabetSortFlag = 1;
                 break;
             }
-
             default:
             {
                 printf("\nFlags name: %s\n", argv[arg_counter]);
                 throw(UNKNOWN_FLAG_ERR, "Name of the flag is unknown.", argv[arg_counter]);
             }
         }
-
         argc--;
         arg_counter++;
     }
@@ -107,7 +104,6 @@ int executeProgram(text_t *data, int argc, char **argv)
 
     return EXIT_SUCCESS;
 }
-
 #undef execute
 
 
@@ -153,7 +149,6 @@ int getBuf(text_t *data, const char *inputFile)
                   "Buffer error.");
 
         data->size = l_buf_sz;
-
         fread(data->buffer, 1, l_buf_sz, file);
         fclose(file);
     }
@@ -202,7 +197,6 @@ int makeTokens(text_t *data, char *separator)
 
     data->tokens = tokensArr;
     size_t tokAmount = 0;
-
     char *curToken = strtok(data->buffer, separator);
     char *curTokenOld = 0;
 
@@ -214,7 +208,6 @@ int makeTokens(text_t *data, char *separator)
         tokensArr[tokAmount].length = curToken - curTokenOld - 1;
         tokAmount++;
     }
-
     tokensArr[tokAmount - 1].length = strlen(curTokenOld);
     data->tokensAmount = tokAmount;
     return 0;
@@ -293,7 +286,6 @@ int swapTokens(text_t *data)
         swapStr_t(&_tokens[i], &_tokens[i + _tokensAmount / 2]);
 
     return 0;
-
 }
 
 
@@ -324,7 +316,6 @@ int printText(text_t *data, const char *outputFile)
     for (int i = 0; i < data->tokensAmount; i++)
         fprintf(output, "%s\n", arrOfStr[i].str);
     fclose(output);
-
     return 0;
 }
 
