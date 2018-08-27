@@ -1,0 +1,82 @@
+("Plant"
+	("Animal"
+		("Exists"
+			("Hulk Smash"
+				("droid"
+					("Chewbacca"
+					)
+					("gold"
+						("R2-D2"
+						)
+						("c-3po"
+						)
+					)
+				)
+				("Hulk"
+				)
+			)
+			("Steps slowly"
+				("Ferrari"
+				)
+				("Lives on special island"
+					("Ulitka"
+					)
+					("Creeper"
+					)
+				)
+			)
+		)
+		("small"
+			("mooo"
+				("lives in Belarus"
+					("Horse"
+					)
+					("Zubr"
+					)
+				)
+				("Cow"
+				)
+			)
+			("meows"
+				("Dog"
+				)
+				("Zhivet v edinichke"
+					("cat"
+					)
+					("Poltorashka"
+					)
+				)
+			)
+		)
+	)
+	("In Russia"
+		("Very tall"
+			("Palm"
+			)
+			("i am groot"
+				("Sekvoia"
+				)
+				("Groot"
+				)
+			)
+		)
+		("Canada!!!"
+			("ono vitryzvlyait"
+				("apple"
+					("Berezka"
+					)
+					("iabloni"
+					)
+				)
+				("vitrizlauchee derevo vozle troiki"
+				)
+			)
+			("Hockey"
+				("Clen"
+				)
+				("Klushka"
+				)
+			)
+		)
+	)
+)

@@ -1,0 +1,124 @@
+digraph dump
+{
+Node001A11B8 [shape = record,  color = red, label = "{ { Plant| '001A11B8' } | { Parent| '00000000' } | { Left = 001A1280 | Right = 001AA970 } }"]
+Node001A1280 [shape = record,  color = red, label = "{ { Animal| '001A1280' } | { Parent| '001A11B8' } | { Left = 001A12B0 | Right = 001AA990 } }"]
+Node001A12B0 [shape = record,  color = red, label = "{ { Exists| '001A12B0' } | { Parent| '001A1280' } | { Left = 001A0F00 | Right = 001A1048 } }"]
+Node001A0F00 [shape = record,  color = red, label = "{ { Hulk Smash| '001A0F00' } | { Parent| '001A12B0' } | { Left = 001A0F20 | Right = 001A1018 } }"]
+Node001A0F20 [shape = record,  color = red, label = "{ { droid| '001A0F20' } | { Parent| '001A0F00' } | { Left = 001A0F50 | Right = 001A0F88 } }"]
+Node001A0F50 [shape = record,  color = red, label = "{ { Chewbacca| '001A0F50' } | { Parent| '001A0F20' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A0F20 -> Node001A0F50
+Node001A0F88 [shape = record,  color = red, label = "{ { gold| '001A0F88' } | { Parent| '001A0F20' } | { Left = 001A0FB8 | Right = 001A0FE8 } }"]
+Node001A0FB8 [shape = record,  color = red, label = "{ { R2-D2| '001A0FB8' } | { Parent| '001A0F88' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A0F88 -> Node001A0FB8
+Node001A0FE8 [shape = record,  color = red, label = "{ { c-3po| '001A0FE8' } | { Parent| '001A0F88' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A0F88 -> Node001A0FE8
+
+Node001A0F20 -> Node001A0F88
+
+Node001A0F00 -> Node001A0F20
+Node001A1018 [shape = record,  color = red, label = "{ { Hulk| '001A1018' } | { Parent| '001A0F00' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A0F00 -> Node001A1018
+
+Node001A12B0 -> Node001A0F00
+Node001A1048 [shape = record,  color = red, label = "{ { Steps slowly| '001A1048' } | { Parent| '001A12B0' } | { Left = 001A1080 | Right = 001A10B0 } }"]
+Node001A1080 [shape = record,  color = red, label = "{ { Ferrari| '001A1080' } | { Parent| '001A1048' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A1048 -> Node001A1080
+Node001A10B0 [shape = record,  color = red, label = "{ { Lives on special island| '001A10B0' } | { Parent| '001A1048' } | { Left = 001A10F0 | Right = 001AA730 } }"]
+Node001A10F0 [shape = record,  color = red, label = "{ { Ulitka| '001A10F0' } | { Parent| '001A10B0' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A10B0 -> Node001A10F0
+Node001AA730 [shape = record,  color = red, label = "{ { Creeper| '001AA730' } | { Parent| '001A10B0' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001A10B0 -> Node001AA730
+
+Node001A1048 -> Node001A10B0
+
+Node001A12B0 -> Node001A1048
+
+Node001A1280 -> Node001A12B0
+Node001AA990 [shape = record,  color = red, label = "{ { small| '001AA990' } | { Parent| '001A1280' } | { Left = 001AA650 | Right = 001AA950 } }"]
+Node001AA650 [shape = record,  color = red, label = "{ { mooo| '001AA650' } | { Parent| '001AA990' } | { Left = 001AA770 | Right = 001AA8B0 } }"]
+Node001AA770 [shape = record,  color = red, label = "{ { lives in Belarus| '001AA770' } | { Parent| '001AA650' } | { Left = 001AA830 | Right = 001AA610 } }"]
+Node001AA830 [shape = record,  color = red, label = "{ { Horse| '001AA830' } | { Parent| '001AA770' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA770 -> Node001AA830
+Node001AA610 [shape = record,  color = red, label = "{ { Zubr| '001AA610' } | { Parent| '001AA770' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA770 -> Node001AA610
+
+Node001AA650 -> Node001AA770
+Node001AA8B0 [shape = record,  color = red, label = "{ { Cow| '001AA8B0' } | { Parent| '001AA650' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA650 -> Node001AA8B0
+
+Node001AA990 -> Node001AA650
+Node001AA950 [shape = record,  color = red, label = "{ { meows| '001AA950' } | { Parent| '001AA990' } | { Left = 001AA750 | Right = 001AA690 } }"]
+Node001AA750 [shape = record,  color = red, label = "{ { Dog| '001AA750' } | { Parent| '001AA950' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA950 -> Node001AA750
+Node001AA690 [shape = record,  color = red, label = "{ { Zhivet v edinichke| '001AA690' } | { Parent| '001AA950' } | { Left = 001AA8D0 | Right = 001AA6B0 } }"]
+Node001AA8D0 [shape = record,  color = red, label = "{ { cat| '001AA8D0' } | { Parent| '001AA690' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA690 -> Node001AA8D0
+Node001AA6B0 [shape = record,  color = red, label = "{ { Poltorashka| '001AA6B0' } | { Parent| '001AA690' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA690 -> Node001AA6B0
+
+Node001AA950 -> Node001AA690
+
+Node001AA990 -> Node001AA950
+
+Node001A1280 -> Node001AA990
+
+Node001A11B8 -> Node001A1280
+Node001AA970 [shape = record,  color = red, label = "{ { In Russia| '001AA970' } | { Parent| '001A11B8' } | { Left = 001AA790 | Right = 001AA630 } }"]
+Node001AA790 [shape = record,  color = red, label = "{ { Very tall| '001AA790' } | { Parent| '001AA970' } | { Left = 001AA7D0 | Right = 001AA8F0 } }"]
+Node001AA7D0 [shape = record,  color = red, label = "{ { Palm| '001AA7D0' } | { Parent| '001AA790' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA790 -> Node001AA7D0
+Node001AA8F0 [shape = record,  color = red, label = "{ { i am groot| '001AA8F0' } | { Parent| '001AA790' } | { Left = 001AA9B0 | Right = 001AA7B0 } }"]
+Node001AA9B0 [shape = record,  color = red, label = "{ { Sekvoia| '001AA9B0' } | { Parent| '001AA8F0' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA8F0 -> Node001AA9B0
+Node001AA7B0 [shape = record,  color = red, label = "{ { Groot| '001AA7B0' } | { Parent| '001AA8F0' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA8F0 -> Node001AA7B0
+
+Node001AA790 -> Node001AA8F0
+
+Node001AA970 -> Node001AA790
+Node001AA630 [shape = record,  color = red, label = "{ { Canada!!!| '001AA630' } | { Parent| '001AA970' } | { Left = 001AA670 | Right = 001AA930 } }"]
+Node001AA670 [shape = record,  color = red, label = "{ { ono vitryzvlyait| '001AA670' } | { Parent| '001AA630' } | { Left = 001AA6D0 | Right = 001AA870 } }"]
+Node001AA6D0 [shape = record,  color = red, label = "{ { apple| '001AA6D0' } | { Parent| '001AA670' } | { Left = 001AA6F0 | Right = 001AA710 } }"]
+Node001AA6F0 [shape = record,  color = red, label = "{ { Berezka| '001AA6F0' } | { Parent| '001AA6D0' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA6D0 -> Node001AA6F0
+Node001AA710 [shape = record,  color = red, label = "{ { iabloni| '001AA710' } | { Parent| '001AA6D0' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA6D0 -> Node001AA710
+
+Node001AA670 -> Node001AA6D0
+Node001AA870 [shape = record,  color = red, label = "{ { vitrizlauchee derevo vozle troiki| '001AA870' } | { Parent| '001AA670' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA670 -> Node001AA870
+
+Node001AA630 -> Node001AA670
+Node001AA930 [shape = record,  color = red, label = "{ { Hockey| '001AA930' } | { Parent| '001AA630' } | { Left = 001AA890 | Right = 001AA7F0 } }"]
+Node001AA890 [shape = record,  color = red, label = "{ { Clen| '001AA890' } | { Parent| '001AA930' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA930 -> Node001AA890
+Node001AA7F0 [shape = record,  color = red, label = "{ { Klushka| '001AA7F0' } | { Parent| '001AA930' } | { Left = 00000000 | Right = 00000000 } }"]
+
+Node001AA930 -> Node001AA7F0
+
+Node001AA630 -> Node001AA930
+
+Node001AA970 -> Node001AA630
+
+Node001A11B8 -> Node001AA970
+}

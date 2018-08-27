@@ -1,0 +1,83 @@
+digraph dump
+{
+Node001A11B8 [shape = record,  color = blue, label = " { Plant }"] Node001A1280 [shape = record,  color = blue, label = " { Animal }"] Node001A12B0 [shape = record,  color = blue, label = " { Exists }"] Node001A0F00 [shape = record,  color = blue, label = " { Hulk Smash }"] Node001A0F20 [shape = record,  color = blue, label = " { droid }"] Node001A0F50 [shape = record,  color = blue, label = " { Chewbacca }"] 
+Node001A0F20 -> Node001A0F50
+Node001A0F88 [shape = record,  color = blue, label = " { gold }"] Node001A0FB8 [shape = record,  color = blue, label = " { R2-D2 }"] 
+Node001A0F88 -> Node001A0FB8
+Node001A0FE8 [shape = record,  color = blue, label = " { c-3po }"] 
+Node001A0F88 -> Node001A0FE8
+
+Node001A0F20 -> Node001A0F88
+
+Node001A0F00 -> Node001A0F20
+Node001A1018 [shape = record,  color = blue, label = " { Hulk }"] 
+Node001A0F00 -> Node001A1018
+
+Node001A12B0 -> Node001A0F00
+Node001A1048 [shape = record,  color = blue, label = " { Steps slowly }"] Node001A1080 [shape = record,  color = blue, label = " { Ferrari }"] 
+Node001A1048 -> Node001A1080
+Node001A10B0 [shape = record,  color = blue, label = " { Lives on special island }"] Node001A10F0 [shape = record,  color = blue, label = " { Ulitka }"] 
+Node001A10B0 -> Node001A10F0
+Node001AA730 [shape = record,  color = blue, label = " { Creeper }"] 
+Node001A10B0 -> Node001AA730
+
+Node001A1048 -> Node001A10B0
+
+Node001A12B0 -> Node001A1048
+
+Node001A1280 -> Node001A12B0
+Node001AA990 [shape = record,  color = blue, label = " { small }"] Node001AA650 [shape = record,  color = blue, label = " { mooo }"] Node001AA770 [shape = record,  color = blue, label = " { lives in Belarus }"] Node001AA830 [shape = record,  color = blue, label = " { Horse }"] 
+Node001AA770 -> Node001AA830
+Node001AA610 [shape = record,  color = blue, label = " { Zubr }"] 
+Node001AA770 -> Node001AA610
+
+Node001AA650 -> Node001AA770
+Node001AA8B0 [shape = record,  color = blue, label = " { Cow }"] 
+Node001AA650 -> Node001AA8B0
+
+Node001AA990 -> Node001AA650
+Node001AA950 [shape = record,  color = blue, label = " { meows }"] Node001AA750 [shape = record,  color = blue, label = " { Dog }"] 
+Node001AA950 -> Node001AA750
+Node001AA690 [shape = record,  color = blue, label = " { Zhivet v edinichke }"] Node001AA8D0 [shape = record,  color = blue, label = " { cat }"] 
+Node001AA690 -> Node001AA8D0
+Node001AA6B0 [shape = record,  color = blue, label = " { Poltorashka }"] 
+Node001AA690 -> Node001AA6B0
+
+Node001AA950 -> Node001AA690
+
+Node001AA990 -> Node001AA950
+
+Node001A1280 -> Node001AA990
+
+Node001A11B8 -> Node001A1280
+Node001AA970 [shape = record,  color = blue, label = " { In Russia }"] Node001AA790 [shape = record,  color = blue, label = " { Very tall }"] Node001AA7D0 [shape = record,  color = blue, label = " { Palm }"] 
+Node001AA790 -> Node001AA7D0
+Node001AA8F0 [shape = record,  color = blue, label = " { i am groot }"] Node001AA9B0 [shape = record,  color = blue, label = " { Sekvoia }"] 
+Node001AA8F0 -> Node001AA9B0
+Node001AA7B0 [shape = record,  color = blue, label = " { Groot }"] 
+Node001AA8F0 -> Node001AA7B0
+
+Node001AA790 -> Node001AA8F0
+
+Node001AA970 -> Node001AA790
+Node001AA630 [shape = record,  color = blue, label = " { Canada!!! }"] Node001AA670 [shape = record,  color = blue, label = " { ono vitryzvlyait }"] Node001AA6D0 [shape = record,  color = blue, label = " { apple }"] Node001AA6F0 [shape = record,  color = blue, label = " { Berezka }"] 
+Node001AA6D0 -> Node001AA6F0
+Node001AA710 [shape = record,  color = blue, label = " { iabloni }"] 
+Node001AA6D0 -> Node001AA710
+
+Node001AA670 -> Node001AA6D0
+Node001AA870 [shape = record,  color = blue, label = " { vitrizlauchee derevo vozle troiki }"] 
+Node001AA670 -> Node001AA870
+
+Node001AA630 -> Node001AA670
+Node001AA930 [shape = record,  color = blue, label = " { Hockey }"] Node001AA890 [shape = record,  color = blue, label = " { Clen }"] 
+Node001AA930 -> Node001AA890
+Node001AA7F0 [shape = record,  color = blue, label = " { Klushka }"] 
+Node001AA930 -> Node001AA7F0
+
+Node001AA630 -> Node001AA930
+
+Node001AA970 -> Node001AA630
+
+Node001A11B8 -> Node001AA970
+}
